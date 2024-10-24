@@ -1,10 +1,5 @@
-provider "aws" {
-  region = var.region
-  access_key = var.aws_access_id
-  secret_key = var.aws_access_key
-}
 terraform {
-  required_version = ">=1"
+  required_version = ">= 1.1.2"
   cloud {
     organization = "Loot_Learn"
     workspaces {

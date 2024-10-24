@@ -27,11 +27,11 @@ variable "private_cidr_2" {
   description = "Private subnet cidr"
   type = string
 }
-variable "availability_zone_1" {
-  default = "ap-southeast-2"
-  type = string
+variable "ap-southeast-2a" {
+  default = "ap-southeast-2a"
+  description = "CPU Amount AWS EC2 instance."
 }
-variable "availability_zone_2" {
+variable "ap-southeast-2b" {
   default = "ap-southeast-2b"
-  type = string
+  description = "AWS ECS Cluster holding the Container bot file compiler"
 }
