@@ -1,12 +1,13 @@
 resource "random_id" "rand" {
   byte_length = 8
 }
-resource "random_string" "rand" {
-  length  = 4
-}
+
 
 resource "aws_vpc" "loot_learn_vpc"{
   cidr_block = var.vpc-cidr
+  tags = {
+    Name = "lootlearn-${random_id.rand.hex}"
+  }
 }
 resource "aws_subnet" "loot_learn_public_subnet_1" {
   vpc_id            = aws_vpc.loot_learn_vpc.id

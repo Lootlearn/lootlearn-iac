@@ -1,7 +1,7 @@
 terraform {
   required_version = ">= 1.1.2"
   cloud {
-    organization = "Loot_Learn"
+    organization = "Vicdonxp"
     workspaces {
       name = "lootlearn-iac"
     }
