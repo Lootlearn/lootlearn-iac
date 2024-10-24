@@ -3,18 +3,34 @@ variable "region" {
   type = string
   description = "Primary region for your infrastructure"
 }
-variable "vpc-cidr" {
-  default = "10.0.0.0/16"
+
+variable "api_key" {
+  description = "API public key"
+  type        = string
+  sensitive   = true
+}
+variable "aws_access_id" {
+  description = "AWS access key"
+  type        = string
+  sensitive   = true
+}
+variable "aws_access_key" {
+  description = "AWS secret access key"
+  type        = string
+  sensitive   = true
+}
+variable "ssh_public_key"{
+  description = "AWS SSH key value"
+  type        = string
+  sensitive   = true
+}
+variable "ami_id"{
+  description = "ID of the AMI to build"
+  default     = "ami-001f2488b35ca8aad"
   type = string
-  description = "Specify a default VPC"
 }
-variable "public_cidr" {
-  default = [ "10.0.1.0/24", "10.0.2.0/24" ]
-  description = "Public VPC cidr"
-  type = list(string)
-}
-variable "private_cidr" {
-  default = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
-  description = "Private subnet cidr"
-  type = list(any)
+variable "instance_type" {
+  description = "EC2 instance type"
+  default     = "t2.micro"
+  type = string
 }
