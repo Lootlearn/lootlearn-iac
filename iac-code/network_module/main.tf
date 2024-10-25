@@ -70,8 +70,4 @@ resource "aws_security_group" "loot-learn-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-# Exporting VPC and Instance IDs
-output "loot-learn-sg_id" {
-  value = aws_security_group.loot-learn-sg.id
-}
 
