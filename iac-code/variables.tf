@@ -19,10 +19,9 @@ variable "aws_access_key" {
   type        = string
   sensitive   = true
 }
-variable "ssh_public_key" {
-  description = "AWS SSH key value"
+variable "ssh_public_key_name" {
+  default = "lootlearn-server-dev-key"
   type        = string
-  sensitive   = true
 }
 variable "ami_id" {
   description = "ID of the AMI to build"

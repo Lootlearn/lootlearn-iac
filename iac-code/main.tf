@@ -23,7 +23,7 @@ resource "aws_volume_attachment" "volume_attachment" {
 resource "aws_instance" "loot-learn-media-server" {
   ami             = var.ami_id
   instance_type   = var.instance_type
-  key_name        = var.ssh_public_key
+  key_name        = var.ssh_public_key_name
   vpc_security_group_ids = [module.network_module.security_group_id]
   volume_tags = {
     Name = format("test_boot-learn-media-server%s", terraform.workspace)
