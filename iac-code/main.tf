@@ -13,11 +13,11 @@ resource "aws_ebs_volume" "ebs_block" {
 }
 
 # Attach the EBS volume to the EC2 instance
-resource "aws_volume_attachment" "example" {
-  device_name = "/dev/sdf"                  # Device name
+resource "aws_volume_attachment" "volume_attachment" {
+  device_name = "/dev/sdf"
   volume_id   = aws_ebs_volume.ebs_block.id
   instance_id = aws_instance.loot-learn-media-server.id
-  force_detach = true                       # Force-detach on re-run (optional)
+  force_detach = true
 }
 
 resource "aws_instance" "loot-learn-media-server" {
