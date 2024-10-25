@@ -1,47 +1,54 @@
-resource "random_id" "rand" {
-  byte_length = 8
-}
-
-
 resource "aws_vpc" "loot_learn_vpc"{
   cidr_block = var.vpc-cidr
+  enable_dns_support   = true
+  enable_dns_hostnames = true
   tags = {
-    Name = "lootlearn-${random_id.rand.hex}"
+    Name = "lootlearn-vpc"
+  }
+}
+
+resource "aws_internet_gateway" "media-server-internet-gateway" {
+  vpc_id = aws_vpc.loot_learn_vpc.id
+
+  tags = {
+    Name = "media-server-internet-gateway"
   }
 }
 resource "aws_subnet" "loot_learn_public_subnet_1" {
   vpc_id            = aws_vpc.loot_learn_vpc.id
   availability_zone = var.ap-southeast-2a
   cidr_block = var.public_vpc_cidr_1
+  map_public_ip_on_launch = true
   tags = {
-    Name = "Public-Subnet-${random_id.rand.hex}"
-  }
-}
-resource "aws_subnet" "loot_learn_public_subnet_2" {
-  vpc_id            = aws_vpc.loot_learn_vpc.id
-  availability_zone = var.ap-southeast-2b
-  cidr_block = var.public_vpc_cidr_2
-  tags = {
-    Name = "Public-Subnet-${random_id.rand.hex}"
+    Name = "Lootlearn-public-subnet-1"
   }
 }
 
+resource "aws_route_table" "media_server_route_table" {
+  vpc_id = aws_vpc.loot_learn_vpc.id
+
+  tags = {
+    Name = "media-server-route-table"
+  }
+}
+resource "aws_route" "media_server_route" {
+  route_table_id         = aws_route_table.media_server_route_table.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.media-server-internet-gateway.id
+}
+resource "aws_route_table_association" "example_route_table_association" {
+  subnet_id      = aws_subnet.loot_learn_public_subnet_1.id
+  route_table_id = aws_route_table.media_server_route_table.id
+}
 resource "aws_subnet" "loot_learn_private_subnet_1" {
   vpc_id            = aws_vpc.loot_learn_vpc.id
   availability_zone = var.ap-southeast-2a
   cidr_block = var.private_cidr_1
   tags = {
-    Name = "Private-Subnet-${random_id.rand.hex}"
+    Name = "Lootlearn-private-subnet-1"
   }
 }
-resource "aws_subnet" "loot_learn_private_subnet_2" {
-  vpc_id            = aws_vpc.loot_learn_vpc.id
-  availability_zone = var.ap-southeast-2b
-  cidr_block = var.private_cidr_2
-  tags = {
-    Name = "Private-Subnet-${random_id.rand.hex}"
-  }
-}
+
 
 # Security Group for Frontend (Public)
 resource "aws_security_group" "loot-learn-sg" {
