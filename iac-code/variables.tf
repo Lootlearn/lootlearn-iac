@@ -34,3 +34,11 @@ variable "instance_type" {
   default     = "t2.micro"
   type        = string
 }
+variable "ap-southeast-2a" {
+  default = "ap-southeast-2a"
+  description = "CPU Amount AWS EC2 instance."
+}
+variable "ap-southeast-2b" {
+  default = "ap-southeast-2b"
+  description = "AWS ECS Cluster holding the Container bot file compiler"
+}
