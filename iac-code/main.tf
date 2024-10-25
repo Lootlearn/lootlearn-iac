@@ -30,4 +30,5 @@ resource "aws_instance" "loot-learn-media-server" {
   }
   associate_public_ip_address = true
   availability_zone = var.ap-southeast-2a
+  subnet_id = module.network_module.subnet_id_public_1
 }
