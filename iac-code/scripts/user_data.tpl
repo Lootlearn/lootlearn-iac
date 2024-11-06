@@ -9,6 +9,7 @@ export KEY_STORE_PASSWORD="${key_store_password}"
 export CERTIFICATE="${certificate}"
 export PEM_KEY="${pem_key}"
 export KEY_STORE_PASSWORD="${key_store_password}"
+export DOCKER_COMPOSE_FILE="${docker_compose}"
 
 sudo apt update -y
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common && sudo install -m 0755 -d /etc/apt/keyring && sudo curl -fsSL https://download.docker.com>

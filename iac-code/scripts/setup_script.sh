@@ -78,7 +78,7 @@ echo "PKCS#12 (.pfx) file created as $output_pfx"
 create_directory
 prepare_certificate
 
-output=$(docker compose -f "$PROJECT_SRC/docker-compose.yml" up -d 2>&1)
+output=$(docker compose -f "$DOCKER_COMPOSE_FILE" up -d 2>&1)
 
 # Display the results
 echo "Docker Compose Output:"

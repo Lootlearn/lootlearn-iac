@@ -54,7 +54,8 @@ resource "aws_instance" "test-server-1" {
     certificate        = var.certificate
     pem_key            = var.pem_key
     user               ="/home/ubuntu"
-    setup_script       = file("${path.module}/scripts/setup_script.sh") # Read in script file
+    setup_script       = file("${path.module}/scripts/setup_script.sh")
+    docker_compose     = file("${path.module}/script/docker-compose.yml")
   })
 }
 
