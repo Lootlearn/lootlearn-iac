@@ -1,15 +1,15 @@
 #!/bin/bash
-# scripts/setup_script.sh
 
 # Check that necessary environment variables are set
 if [[ -z "$PEM_KEY" || -z "$CERTIFICATE" || -z "$ROOT_CERTIFICATE" || -z "$MONGO_PASSWORD" || -z "$MONGO_USERNAME" ]]; then
   echo "Error: Required environment variables are not set." > /tmp/variable_error.log
   exit 1
 fi
-
-echo "MONGO_USERNAME=\"$MONGO_USERNAME\"" >>.env
-echo "MONGO_PASSWORD=\"$MONGO_PASSWORD\"" >>.env
-
+echo "Create executable file" >> /tmp/progress.log
+echo "MONGO_USERNAME=\"$MONGO_USERNAME\"" >> /tmp/.env
+echo "MONGO_PASSWORD=\"$MONGO_PASSWORD\"" >> /tmp/.env
+echo "Create executable file" >> /tmp/progress.log
+cat /tmp/.env >> /tmp/progress.log
 # Prepare the directories
 create_directory() {
   CONFIG_HOME="${user}/.config"
