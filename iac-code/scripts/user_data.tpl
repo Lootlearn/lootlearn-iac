@@ -12,7 +12,8 @@ export KEY_STORE_PASSWORD="${key_store_password}"
 
 
 sudo apt update -y
-sudo apt install -y apt-transport-https ca-certificates curl software-properties-common && sudo install -m 0755 -d /etc/apt/keyring && sudo curl -fsSL https://download.docker.com>
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common && sudo install -m 0755 -d /etc/apt/keyring
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc && sudo chmod a+r /etc/apt/keyrings/docker.asc
 
 # Add the repository to Apt sources
 echo \
