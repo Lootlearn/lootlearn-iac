@@ -58,13 +58,13 @@ resource "aws_instance" "loot-learn-test-server" {
   })
 }
 
-resource "aws_lb_target_group_attachment" "loot-prod_target_port_3004" {
-  target_group_arn = module.network_module.loot_learn_aws_target_group_3004
-  target_id        = aws_instance.loot-learn-media-server.id
-  port             = 3004
-}
-resource "aws_lb_target_group_attachment" "loot-prod_target_port_3300" {
-  target_group_arn = module.network_module.loot_learn_aws_target_group_3300
-  target_id        = aws_instance.loot-learn-media-server.id
-  port             = 3000
-}
+# resource "aws_lb_target_group_attachment" "loot-prod_target_port_3004" {
+#   target_group_arn = module.network_module.loot_learn_aws_target_group_3004
+#   target_id        = aws_instance.loot-learn-media-server.id
+#   port             = 3004
+# }
+# resource "aws_lb_target_group_attachment" "loot-prod_target_port_3300" {
+#   target_group_arn = module.network_module.loot_learn_aws_target_group_3300
+#   target_id        = aws_instance.loot-learn-media-server.id
+#   port             = 3000
+# }
