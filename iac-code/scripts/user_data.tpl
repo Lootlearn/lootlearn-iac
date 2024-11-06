@@ -18,7 +18,7 @@ fi
 
 # Copy the setup script to the instance
 cat << 'EOF' > /tmp/setup_script.sh
-${file("${path.module}/scripts/setup_script.sh")}
+${setup_script}
 EOF
 
 # Make the script executable and run it
