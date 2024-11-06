@@ -53,10 +53,6 @@ variable "key_store_password" {
   type      = string
   sensitive = true
 }
-variable "root_certificate" {
-  type      = string
-  sensitive = true
-}
 variable "pem_key" {
   type      = string
   sensitive = true
