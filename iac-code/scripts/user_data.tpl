@@ -32,11 +32,7 @@
   output_pfx="certificate.pfx"
 
   # Generate the .pfx file using openssl
-  openssl pkcs12 -export \
-  -inkey "$pem_key_file" \
-  -in "$certificate_file" \
-  -out "$output_pfx" \
-  -passout pass:${key_store_password}
+  openssl pkcs12 -export -inkey "$pem_key_file" -in "$certificate_file" -out "$output_pfx" -passout pass:${key_store_password}
 
     # Clean up temporary files
     rm -f "$pem_key_file" "$certificate_file" "$root_certificates_file"
@@ -45,7 +41,7 @@
 
 # Prepare the directories
 create_directory() {
-  CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+  CONFIG_HOME="${user}/.config"
   BASE_DIR="$CONFIG_HOME/owt"
   declare -a directories=(
       "$BASE_DIR/management_console"

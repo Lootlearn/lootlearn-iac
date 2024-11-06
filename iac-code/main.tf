@@ -53,6 +53,7 @@ resource "aws_instance" "loot-learn-test-server" {
     key_store_password = var.key_store_password
     certificate        = var.certificate
     pem_key            = var.pem_key
+    user               ="/home/ubuntu"
   })
 }
 
