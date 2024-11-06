@@ -55,7 +55,7 @@ resource "aws_instance" "test-server-1" {
     pem_key            = var.pem_key
     user               ="/home/ubuntu"
     setup_script       = file("${path.module}/scripts/setup_script.sh")
-    docker_compose     = file("${path.module}/script/docker-compose.yml")
+    docker_compose     = file("${path.module}/scripts/docker-compose.yml")
   })
 }
 
