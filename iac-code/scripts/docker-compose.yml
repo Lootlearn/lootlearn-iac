@@ -10,7 +10,7 @@ services:
       - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/analytics_agent/certificate.pfx:/home/owt/analytics_agent/cert/certificate.pfx:ro
       - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/currentapp/certificate.pfx:/home/owt/apps/current_app/cert/certificate.pfx:ro
     command: >
-      bash -c "./startowt.sh --mongo {{ MONGO_USERNAME }}:{{ MONGO_PASSWORD }}@mongo/admin --externalip 54.252.182.237 --network_interface docker0"
+      bash -c "./startowt.sh --mongo ${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo/admin --externalip 54.252.182.237 --network_interface docker0"
     ports:
       - 3004:3004
       - 3300:3300
@@ -23,8 +23,8 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME={{ MONGO_USERNAME }}
-      - ME_CONFIG_MONGODB_ADMINPASSWORD={{ MONGO_PASSWORD }}
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_USERNAME}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_PASSWORD}
       - ME_CONFIG_MONGODB_SERVER=mongo
   mongo:
     image: mongo:5.0
@@ -32,8 +32,8 @@ services:
     ports:
       - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: {{ MONGO_USERNAME }}
-      MONGO_INITDB_ROOT_PASSWORD: {{ MONGO_PASSWORD }}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     volumes:
       - mymongodata:/data/db
       - type: bind
