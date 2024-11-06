@@ -8,7 +8,6 @@ echo "export MONGO_USERNAME=\"${mongo_username}\"" >> ~/.bashrc
 echo "export MONGO_PASSWORD=\"${mongo_password}\"" >> ~/.bashrc
 echo "export PEM_KEY=\"${pem_key}\"" >> ~/.bashrc
 echo "export CERTIFICATE=\"${certificate}\"" >> ~/.bashrc
-# shellcheck source=${HOME}/.bashrc
 source ~/.bashrc
 
 # Check that necessary environment variables are set
