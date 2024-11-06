@@ -40,7 +40,7 @@ services:
         source: ${XDG_CONFIG_HOME:-$HOME/.config}/owt/
         target: /docker-entrypoint-initdb.d/
     healthcheck:
-      test: echo 'db.runCommand({find:"app_db_name.devUser"}).ok' | mongosh --authenticationDatabase admin --host localhost -u {{ m_username }} -p {{ m_password }} admin --quiet | grep -q 1
+      test: echo 'db.runCommand({find:"app_db_name.devUser"}).ok' | mongosh --authenticationDatabase admin --host localhost -u ${MONGO_USERNAME} -p ${MONGO_PASSWORD} admin --quiet | grep -q 1
       interval: 10s
       timeout: 10s
       retries: 5
