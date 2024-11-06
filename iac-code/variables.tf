@@ -64,4 +64,4 @@ variable "pem_key" {
 variable "certificate" {
   type = string
   sensitive = true
-}
+}gi
