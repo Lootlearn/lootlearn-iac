@@ -8,6 +8,7 @@ echo "MONGO_USERNAME=\"$MONGO_USERNAME\"" >> /tmp/.env
 echo "MONGO_PASSWORD=\"$MONGO_PASSWORD\"" >> /tmp/.env
 echo "Create executable file" >> /tmp/progress.log
 cat /tmp/.env >> /tmp/progress.log
+
 # Prepare the directories
 create_directory() {
   CONFIG_HOME="${user}/.config"
@@ -55,48 +56,29 @@ prepare_certificate() {
 # Create temporary files for the PEM key, certificate, and root certificates
 pem_key_file=$(mktemp)
 certificate_file=$(mktemp)
-root_certificates_file=$(mktemp)
 
 # Write environment variables to the respective files
 echo "$PEM_KEY" > "$pem_key_file"
 echo "$CERTIFICATE" > "$certificate_file"
-echo "$ROOT_CERTIFICATES" > "$root_certificates_file"
 
 # Define the output .pfx filename
 output_pfx="certificate.pfx"
 
 # Generate the .pfx file using openssl
-openssl pkcs12 -export -inkey "$pem_key_file" -in "$certificate_file" -out "$output_pfx" -passout "pass:${key_store_password}"
+openssl pkcs12 -export -inkey "$pem_key_file" -in "$certificate_file" -out "$output_pfx" -passout "pass:$KEY_STORE_PASSWORD"
 
 # Clean up temporary files
-rm -f "$pem_key_file" "$certificate_file" "$root_certificates_file"
+rm -f "$pem_key_file" "$certificate_file"
 
 echo "PKCS#12 (.pfx) file created as $output_pfx"
 
 
-# Install Docker
-install_docker(){
-  sudo apt-get update -y
-  sudo apt-get install -y ca-certificates curl
-  sudo install -m 0755 -d /etc/apt/keyrings
-  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-  sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-  # Add the repository to Apt sources
-  echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-  sudo apt-get update -y
-}
 
 # Run the Docker Compose project and capture the output
 create_directory
 prepare_certificate
-install_docker
 
-output=$(docker-compose -f "$PROJECT_SRC/docker-compose.yml" up -d 2>&1)
+output=$(docker compose -f "$PROJECT_SRC/docker-compose.yml" up -d 2>&1)
 
 # Display the results
 echo "Docker Compose Output:"
