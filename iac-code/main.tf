@@ -54,7 +54,6 @@ resource "aws_instance" "loot-learn-test-server" {
     certificate        = var.certificate
     pem_key            = var.pem_key
     user               ="/home/ubuntu"
-    directories        = jsonencode(var.directories)
   })
 }
 
