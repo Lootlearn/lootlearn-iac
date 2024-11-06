@@ -41,3 +41,27 @@ variable "ap-southeast-2b" {
   default = "ap-southeast-2b"
   description = "AWS ECS Cluster holding the Container bot file compiler"
 }
+variable "mongo_username"{
+  type = string
+  sensitive = true
+}
+variable "mongo_password"{
+  type = string
+  sensitive = true
+}
+variable "key_store_password" {
+  type = string
+  sensitive = true
+}
+variable "root_certificate" {
+  type = string
+  sensitive = true
+}
+variable "pem_key" {
+  type = string
+  sensitive = true
+}
+variable "certificate" {
+  type = string
+  sensitive = true
+}

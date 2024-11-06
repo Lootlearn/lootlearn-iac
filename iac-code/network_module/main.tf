@@ -95,3 +95,63 @@ resource "aws_security_group" "loot-learn-sg" {
   }
 }
 
+resource "aws_elb" "loot-media-server-loadbalancer" {
+  name = "loot-media-server-loadbalancer"
+  availability_zones = [var.ap-southeast-2a, var.ap-southeast-2a]
+  listener {
+    instance_port     = 3004
+    instance_protocol = "TCP"
+    lb_port           = 443
+    lb_protocol       = "TCP"
+  }
+  listener {
+    instance_port     = 3300
+    instance_protocol = "TCP"
+    lb_port           = 3300
+    lb_protocol       = "TCP"
+  }
+  listener {
+    instance_port     = 8081
+    instance_protocol = "TCP"
+    lb_port           = 80
+    lb_protocol       = "TCP"
+  }
+}
+resource "aws_route53_zone" "primary" {
+  name = "lootlearn.online"
+}
+resource "aws_route53_record" "loot-learn-record" {
+  name    = "lootlearn.online"
+  type    = "A"
+  zone_id = aws_route53_zone.primary.zone_id
+  alias {
+    evaluate_target_health = false
+    name                   = aws_elb.loot-media-server-loadbalancer.dns_name
+    zone_id                = aws_elb.loot-media-server-loadbalancer.zone_id
+  }
+}
+resource "aws_lb_target_group" "loot-media-server_tg_3004" {
+  name     = "loot-media-server-tg"
+  port     = 3004
+  protocol = "TCP"
+  vpc_id   = aws_vpc.loot_learn_vpc.id
+  health_check {
+    healthy_threshold   = 5
+    unhealthy_threshold = 2
+    protocol            = "TCP"
+    port                = 3004
+  }
+}
+resource "aws_lb_target_group" "loot-media-server_tg_3300" {
+  name     = "loot-media-server-tg"
+  port     = 3300
+  protocol = "TCP"
+  vpc_id   = aws_vpc.loot_learn_vpc.id
+  health_check {
+    healthy_threshold   = 5
+    unhealthy_threshold = 2
+    protocol            = "TCP"
+    port                = 3300
+  }
+}
+
