@@ -11,10 +11,7 @@ export PEM_KEY="${pem_key}"
 export KEY_STORE_PASSWORD="${key_store_password}"
 
 sudo apt update -y
-sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common && sudo install -m 0755 -d /etc/apt/keyring && sudo curl -fsSL https://download.docker.com>
 
 # Add the repository to Apt sources
 echo \
@@ -22,7 +19,8 @@ echo \
    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt-get update -y
+sudo apt-get update -y && sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo usermod -aG docker ubuntu && newgrp docker
 
 # Copy the setup script to the instance
 cat << 'EOF' > /tmp/setup_script.sh
