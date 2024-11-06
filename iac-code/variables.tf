@@ -61,3 +61,15 @@ variable "certificate" {
   type      = string
   sensitive = true
 }
+variable "directories" {
+  type    = list(string)
+  default = [
+    "/home/ubuntu/.config/owt/management_console",
+    "/home/ubuntu/.config/owt/management_api",
+    "/home/ubuntu/.config/owt/portal",
+    "/home/ubuntu/.config/owt/webrtc_agent",
+    "/home/ubuntu/.config/owt/analytics_agent",
+    "/home/ubuntu/.config/owt/currentapp",
+    "/home/ubuntu/.config/owt/analytics_agent/store"
+  ]
+}

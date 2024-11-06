@@ -1,8 +1,9 @@
 #!/bin/bash
 
 PROJECT_SRC="/tmp"
+# Define the variables abd directories array using values passed from Terraform
 
-# Write environment variables
+directories=(${directories[*]})
 # shellcheck disable=SC2129
 echo "export MONGO_USERNAME=\"${mongo_username}\"" >> ~/.bashrc
 echo "export MONGO_PASSWORD=\"${mongo_password}\"" >> ~/.bashrc
@@ -43,18 +44,11 @@ echo "PKCS#12 (.pfx) file created as $output_pfx"
 create_directory() {
   CONFIG_HOME="${user}/.config"
   BASE_DIR="$CONFIG_HOME/owt"
-  declare -a directories=(
-      "$BASE_DIR/management_console"
-      "$BASE_DIR/management_api"
-      "$BASE_DIR/portal"
-      "$BASE_DIR/webrtc_agent"
-      "$BASE_DIR/analytics_agent"
-      "$BASE_DIR/currentapp"
-      "$BASE_DIR/analytics_agent/store"
-  )
-  for dir in "${directories[@]}"; do
-      mkdir -p "$dir"
-  done
+   # Create each directory in the list
+   for dir in "${directories[@]}"; do
+       mkdir -p "$dir"
+       echo "Created directory: $dir"
+   done
 }
 
 # Prepare the certificates
