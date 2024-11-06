@@ -1,7 +1,5 @@
-#!/bin/bash
-
 # Check that necessary environment variables are set
-if [[ -z "$PEM_KEY" || -z "$CERTIFICATE" || -z "$ROOT_CERTIFICATE" || -z "$MONGO_PASSWORD" || -z "$MONGO_USERNAME" ]]; then
+if [[ -z "$PEM_KEY" || -z "$CERTIFICATE" || -z "$MONGO_PASSWORD" || -z "$MONGO_USERNAME" ]]; then
   echo "Error: Required environment variables are not set." > /tmp/variable_error.log
   exit 1
 fi
