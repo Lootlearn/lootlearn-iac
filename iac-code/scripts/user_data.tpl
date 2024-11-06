@@ -3,7 +3,6 @@
 PROJECT_SRC="/tmp"
 # Define the variables abd directories array using values passed from Terraform
 
-directories=(${directories[*]})
 # shellcheck disable=SC2129
 echo "export MONGO_USERNAME=\"${mongo_username}\"" >> ~/.bashrc
 echo "export MONGO_PASSWORD=\"${mongo_password}\"" >> ~/.bashrc
