@@ -9,7 +9,7 @@ export KEY_STORE_PASSWORD="${key_store_password}"
 export CERTIFICATE="${certificate}"
 export PEM_KEY="${pem_key}"
 export KEY_STORE_PASSWORD="${key_store_password}"
-export DOCKER_COMPOSE_FILE="${docker_compose}"
+
 
 sudo apt update -y
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common && sudo install -m 0755 -d /etc/apt/keyring && sudo curl -fsSL https://download.docker.com>
@@ -27,6 +27,12 @@ sudo usermod -aG docker ubuntu && newgrp docker
 cat << 'EOF' > /tmp/setup_script.sh
 ${setup_script}
 EOF
+
+# Copy the setup script to the instance
+cat << 'EOF' > /tmp/docker-compose.yml
+${docker_compose}
+EOF
+
 
 # Make the script executable and run it
 chmod +x /tmp/setup_script.sh
