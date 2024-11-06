@@ -7,7 +7,8 @@ if [[ -z "$PEM_KEY" || -z "$CERTIFICATE" || -z "$ROOT_CERTIFICATE" || -z "$MONGO
   exit 1
 fi
 
-
+echo "MONGO_USERNAME=\"$MONGO_USERNAME\"" >>.env
+echo "MONGO_PASSWORD=\"$MONGO_PASSWORD\"" >>.env
 
 # Prepare the directories
 create_directory() {

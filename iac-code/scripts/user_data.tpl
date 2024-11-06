@@ -4,11 +4,11 @@ PROJECT_SRC="/tmp"
 # Define the variables abd directories array using values passed from Terraform
 
 # shellcheck disable=SC2129
-echo "export MONGO_USERNAME=\"${mongo_username}\"" >> ~/.bashrc
-echo "export MONGO_PASSWORD=\"${mongo_password}\"" >> ~/.bashrc
-echo "export PEM_KEY=\"${pem_key}\"" >> ~/.bashrc
-echo "export CERTIFICATE=\"${certificate}\"" >> ~/.bashrc
-source ~/.bashrc
+export MONGO_USERNAME="${mongo_username}"
+export MONGO_PASSWORD="${mongo_password}"
+export KEY_STORE_PASSWORD="${key_store_password}"
+export CERTIFICATE="${certificate}"
+export PEM_KEY="${pem_key}"
 
 
 # Copy the setup script to the instance
