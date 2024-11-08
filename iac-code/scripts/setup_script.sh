@@ -1,3 +1,6 @@
+
+$MY_NAME
+
 # Check that necessary environment variables are set
 if [[ -z "$PEM_KEY" || -z "$CERTIFICATE" || -z "$MONGO_PASSWORD" || -z "$MONGO_USERNAME" ]]; then
   echo "Error: Required environment variables are not set." > /tmp/variable_error.log
@@ -21,6 +24,7 @@ create_directory() {
       "$BASE_DIR/analytics_agent"
       "$BASE_DIR/currentapp"
       "$BASE_DIR/analytics_agent/store"
+      "$BASE_DIR/owt/agent_management"
   )
     # Create each directory in the list
     for dir in "${directories[@]}"; do

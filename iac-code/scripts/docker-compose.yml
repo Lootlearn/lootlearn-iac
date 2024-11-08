@@ -9,6 +9,7 @@ services:
       - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/analytics_agent/store/.owt.keystore:/home/owt/analytics_agent/cert/.owt.keystore:ro
       - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/analytics_agent/certificate.pfx:/home/owt/analytics_agent/cert/certificate.pfx:ro
       - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/currentapp/certificate.pfx:/home/owt/apps/current_app/cert/certificate.pfx:ro
+      - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/agent_management/agent_i_config.toml:/home/owt/management_api.toml:ro
     command: >
       bash -c "./startowt.sh --mongo ${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo/admin --externalip 54.252.182.237 --network_interface docker0"
     ports:

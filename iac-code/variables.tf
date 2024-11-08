@@ -61,3 +61,7 @@ variable "certificate" {
   type      = string
   sensitive = true
 }
+variable "my_name"{
+  type = string
+  default = "Victor"
+}

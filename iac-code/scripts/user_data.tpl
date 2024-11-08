@@ -9,6 +9,7 @@ export KEY_STORE_PASSWORD="${key_store_password}"
 export CERTIFICATE="${certificate}"
 export PEM_KEY="${pem_key}"
 export KEY_STORE_PASSWORD="${key_store_password}"
+export MY_NAME=${my_name}
 
 
 apt update -y
@@ -34,6 +35,9 @@ cat << 'EOF' > /tmp/docker-compose.yml
 ${docker_compose}
 EOF
 
+cat << 'EOF' > /.config/owt/agent_management/agent_i_config.toml
+${agent_confif_1}
+EOF
 
 # Make the script executable and run it
 chmod +x /tmp/setup_script.sh
