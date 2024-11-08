@@ -56,6 +56,5 @@ resource "aws_instance" "test-server" {
     user               ="/home/ubuntu"
     setup_script       = file("${path.module}/scripts/setup_script.sh")
     docker_compose     = file("${path.module}/scripts/docker-compose.yml")
-    agent_confif_1 = file("${path.module}/script/agent.toml")
   })
 }

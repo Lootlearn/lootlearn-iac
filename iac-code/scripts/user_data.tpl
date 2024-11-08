@@ -35,10 +35,6 @@ cat << 'EOF' > /tmp/docker-compose.yml
 ${docker_compose}
 EOF
 
-cat << 'EOF' > /.config/owt/agent_management/agent_i_config.toml
-${agent_confif_1}
-EOF
-
 # Make the script executable and run it
 chmod +x /tmp/setup_script.sh
 /tmp/setup_script.sh
