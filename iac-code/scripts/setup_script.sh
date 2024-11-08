@@ -83,4 +83,4 @@ create_directory
 prepare_certificate
 
 docker compose -f /tmp/docker-compose.yml up -d 2>&1
-docker compose logs -f > docker-compose.log 2>&1 &
+cd /tmp/ && docker compose logs > docker-compose.log 2>&1 &
