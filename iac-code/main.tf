@@ -19,10 +19,10 @@ resource "aws_ebs_volume" "ebs_block" {
 resource "aws_volume_attachment" "volume_attachment" {
   device_name  = "/dev/sdf"
   volume_id    = aws_ebs_volume.ebs_block.id
-  instance_id  = aws_instance.loot-learn-media-server.id
+  instance_id  = aws_instance.loot-learn-media-server-dev.id
   force_detach = true
 }
-resource "aws_instance" "loot-learn-media-server" {
+resource "aws_instance" "loot-learn-media-server-dev" {
   ami                         = var.ami_id
   instance_type               = var.instance_type
   key_name                    = var.ssh_public_key_name
