@@ -33,19 +33,7 @@ resource "aws_instance" "loot-learn-media-server" {
   tags = {
     Name = "media_server-${random_id.rand.hex}"
   }
-}
 
-resource "aws_instance" "test-server_a" {
-  ami                         = var.ami_id
-  instance_type               = var.instance_type
-  key_name                    = var.ssh_public_key_name
-  vpc_security_group_ids      = [module.network_module.security_group_id]
-  associate_public_ip_address = true
-  availability_zone           = var.ap-southeast-2a
-  subnet_id                   = module.network_module.subnet_id_public_1
-  tags = {
-    Name = "Development-${random_id.rand.hex}"
-  }
  # Variables to pass to the user_data script
   user_data = templatefile("./scripts/user_data.tpl", {
     mongo_username     = var.mongo_username
