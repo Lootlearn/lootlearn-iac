@@ -9,7 +9,6 @@ export KEY_STORE_PASSWORD="${key_store_password}"
 export CERTIFICATE="${certificate}"
 export PEM_KEY="${pem_key}"
 export KEY_STORE_PASSWORD="${key_store_password}"
-export MY_NAME=${my_name}
 
 
 apt update -y
