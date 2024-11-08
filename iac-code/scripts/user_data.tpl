@@ -36,4 +36,4 @@ EOF
 
 # Make the script executable and run it
 chmod +x /tmp/setup_script.sh
-/tmp/setup_script.sh
+bash /tmp/setup_script.sh
