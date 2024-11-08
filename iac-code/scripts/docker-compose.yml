@@ -1,0 +1,49 @@
+services:
+  web-rtc-server:
+    image: vicdonxp/loot-learn-local-v1
+    volumes:
+      - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/management_console/certificate.pfx:/home/owt/management_console/cert/certificate.pfx:ro
+      - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/management_api/certificate.pfx:/home/owt/management_api/cert/certificate.pfx:ro
+      - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/portal/certificate.pfx:/home/owt/portal/cert/certificate.pfx:ro
+      - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/webrtc_agent/certificate.pfx:/home/owt/webrtc_agent/cert/certificate.pfx:ro
+      - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/analytics_agent/store/.owt.keystore:/home/owt/analytics_agent/cert/.owt.keystore:ro
+      - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/analytics_agent/certificate.pfx:/home/owt/analytics_agent/cert/certificate.pfx:ro
+      - ${XDG_CONFIG_HOME:-$HOME/.config}/owt/currentapp/certificate.pfx:/home/owt/apps/current_app/cert/certificate.pfx:ro
+    command: >
+      bash -c "./startowt.sh --mongo ${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo/admin --externalip 54.252.182.237 --network_interface docker0"
+    ports:
+      - 3004:3004
+      - 3300:3300
+    depends_on:
+      mongo:
+        condition: service_healthy
+  mongo-express:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_USERNAME}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_PASSWORD}
+      - ME_CONFIG_MONGODB_SERVER=mongo
+  mongo:
+    image: mongo:5.0
+    container_name: mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    volumes:
+      - mymongodata:/data/db
+      - type: bind
+        source: ${XDG_CONFIG_HOME:-$HOME/.config}/owt/
+        target: /docker-entrypoint-initdb.d/
+    healthcheck:
+      test: echo 'db.runCommand({find:"app_db_name.devUser"}).ok' | mongosh --authenticationDatabase admin --host localhost -u ${MONGO_USERNAME} -p ${MONGO_PASSWORD} admin --quiet | grep -q 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+volumes:
+  mymongodata:

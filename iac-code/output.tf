@@ -1,6 +1,7 @@
 output "ec2_instance_public_ip" {
-  value = aws_instance.loot-learn-media-server.public_ip
+  value = aws_instance.loot-learn-media-server-dev.public_ip
 }
+
 # Exporting VPC and Instance IDs
 output "loot-learn-sg_id" {
   value = module.network_module.security_group_id

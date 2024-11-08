@@ -21,7 +21,7 @@ variable "aws_access_key" {
 }
 variable "ssh_public_key_name" {
   default = "lootlearn-server-dev-key"
-  type        = string
+  type    = string
 }
 variable "ami_id" {
   description = "ID of the AMI to build"
@@ -30,14 +30,34 @@ variable "ami_id" {
 }
 variable "instance_type" {
   description = "EC2 instance type"
-  default     = "t2.micro"
+  default     = "t2.2xlarge"
   type        = string
 }
 variable "ap-southeast-2a" {
-  default = "ap-southeast-2a"
+  default     = "ap-southeast-2a"
   description = "CPU Amount AWS EC2 instance."
 }
 variable "ap-southeast-2b" {
-  default = "ap-southeast-2b"
+  default     = "ap-southeast-2b"
   description = "AWS ECS Cluster holding the Container bot file compiler"
+}
+variable "mongo_username" {
+  type      = string
+  sensitive = true
+}
+variable "mongo_password" {
+  type      = string
+  sensitive = true
+}
+variable "key_store_password" {
+  type      = string
+  sensitive = true
+}
+variable "pem_key" {
+  type      = string
+  sensitive = true
+}
+variable "certificate" {
+  type      = string
+  sensitive = true
 }
