@@ -35,7 +35,7 @@ resource "aws_instance" "loot-learn-media-server" {
   }
 }
 
-resource "aws_instance" "test-server_2" {
+resource "aws_instance" "test-server_a" {
   ami                         = var.ami_id
   instance_type               = var.instance_type
   key_name                    = var.ssh_public_key_name

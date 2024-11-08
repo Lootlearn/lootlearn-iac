@@ -84,3 +84,19 @@ prepare_certificate
 
 docker compose -f /tmp/docker-compose.yml up -d 2>&1
 cd /tmp/ && docker compose logs -f > docker-compose.log 2>&1 &
+
+# Check if the log file exist, and write the value of superServiceId and superServiceKey to a file
+
+# Path to the log file
+LOG_FILE="/tmp/docker-compose.log"
+
+# Check if the log file exists
+if [ -f "$LOG_FILE" ]; then
+    echo "Log file found. Waiting for 20 seconds..."
+    sleep 20  # Wait for 20 seconds
+
+    # Search for the required patterns in the log file
+    grep -E "superServiceId: [a-f0-9]{12,}|superServiceKey: [A-Za-z0-9+/=]+|sampleServiceId: [a-f0-9]{12,}|sampleServiceKey: [A-Za-z0-9+/=]+" "$LOG_FILE" > /tmp/credentials.out
+else
+    echo "Log file not found."
+fi
